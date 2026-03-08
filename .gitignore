@@ -1,0 +1,23 @@
+# Data and heavy files
+data/
+*.avi
+*.mp4
+*.mov
+
+# Python environment and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
