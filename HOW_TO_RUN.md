@@ -115,14 +115,3 @@ multimodal_har/
         ├── config.py         # All constants and hyperparameters
         └── training.py       # Training loops, evaluation, grid search
 ```
-
-## 6. Estimated Runtimes (RTX 6000 Ada)
-
-| Task | Approximate Time |
-|------|-----------------|
-| Part 1 EDA | ~2 min |
-| Part 2A Inertial grid search (4 configs × 20 epochs) | ~3 min |
-| Part 2B Video grid search (4 configs × 15 epochs) | ~8 min |
-| Part 3 Fusion training (20 epochs) | ~2 min |
-| Part 4 Robust fusion training (20 epochs) | ~2 min |
-| **Total (Parts 2-4)** | **~15 min** |
