@@ -76,7 +76,7 @@ All results, experiments, and analysis are contained in the **4 notebooks** insi
 
 ## 5. Run the Notebooks
 
-Notebooks are executed **headlessly** using `nbconvert` — this runs all cells in the background, saves the outputs back into the notebook file, and prints a message when done. No browser or Jupyter server is needed.
+Notebooks are executed **headlessly** using `nbconvert` — this runs all cells in the terminal, saves the outputs back into the notebook file, and prints a message when done. No browser or Jupyter server is needed.
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 uv run jupyter nbconvert \
@@ -85,6 +85,8 @@ CUDA_VISIBLE_DEVICES=0 uv run jupyter nbconvert \
   --output <notebook_name>.ipynb \
   --ExecutePreprocessor.timeout=7200
 ```
+
+> **`--ExecutePreprocessor.timeout`**: This sets the maximum number of seconds allowed for any single cell to finish. The default is only 30 seconds, which is far too short for training cells. If the notebook finishes before the timeout is reached, `nbconvert` exits immediately — the timeout is a ceiling, not a wait. If a cell exceeds the timeout, execution is aborted with a `TimeoutError`. Set it high enough to cover your longest-running cell — `7200` (2 hours) is a safe default for training notebooks, and `600` (10 minutes) is enough for EDA.
 
 Once finished, open the `.ipynb` file in any notebook viewer (VS Code, JupyterLab, etc.) to inspect all outputs, plots, and metrics.
 
