@@ -113,3 +113,29 @@ class MultimodalFusion(nn.Module):
         # Concatenate and classify
         fused = torch.cat([v_feat, i_feat], dim=1)  # (B, 640)
         return self.classifier(fused)
+
+    @torch.no_grad()
+    def extract_fusion_vector(
+        self,
+        video: torch.Tensor,
+        inertial: torch.Tensor,
+    ) -> torch.Tensor:
+        """Return the 640-d concatenated feature vector without passing through the classifier.
+
+        This exposes the bottleneck representation used by Parts 6 & 7 (Conformal
+        Prediction and VAE-based OOD detection).  Modality dropout is never
+        applied here since this is always used in evaluation mode.
+
+        Parameters
+        ----------
+        video : (B, 3, T, H, W)
+        inertial : (B, 6, L)
+
+        Returns
+        -------
+        fused : (B, 640) tensor on the same device as the model
+        """
+        self.eval()
+        v_feat = self.video_encoder.extract_features(video)       # (B, 512)
+        i_feat = self.inertial_encoder.extract_features(inertial) # (B, 128)
+        return torch.cat([v_feat, i_feat], dim=1)                 # (B, 640)
