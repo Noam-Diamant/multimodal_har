@@ -72,6 +72,8 @@ All results, experiments, and analysis are contained in the **4 notebooks** insi
 
 > **Note on training time:** Training all models across all four notebooks can take **several hours** in total. To keep runtimes manageable, experiments use a **subset of 10 classes** (out of the full 27) from the UTD-MHAD dataset.
 
+> **Pre-run outputs:** All notebooks have been **pre-executed and their outputs saved**, so you can browse all results, plots, and metrics directly without running anything. Only re-run cells if you want to reproduce or modify the experiments.
+
 ## 5. Run the Notebooks
 
 Register the `uv` virtual environment as a Jupyter kernel before opening notebooks:
