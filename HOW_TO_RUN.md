@@ -76,30 +76,33 @@ All results, experiments, and analysis are contained in the **4 notebooks** insi
 
 ## 5. Run the Notebooks
 
-Register the `uv` virtual environment as a Jupyter kernel before opening notebooks:
+Notebooks are executed **headlessly** using `nbconvert` — this runs all cells in the background, saves the outputs back into the notebook file, and prints a message when done. No browser or Jupyter server is needed.
 
 ```bash
-cd multimodal_har
-uv run python -m ipykernel install --user --name multimodal_har --display-name "multimodal_har (uv)"
+CUDA_VISIBLE_DEVICES=0 uv run jupyter nbconvert \
+  --to notebook --execute \
+  notebooks/<notebook_name>.ipynb \
+  --output <notebook_name>.ipynb \
+  --ExecutePreprocessor.timeout=7200
 ```
 
-Then launch any notebook with:
-
-```bash
-CUDA_VISIBLE_DEVICES=0 uv run jupyter notebook notebooks/<notebook_name>.ipynb
-```
+Once finished, open the `.ipynb` file in any notebook viewer (VS Code, JupyterLab, etc.) to inspect all outputs, plots, and metrics.
 
 ### Part 1 — Exploratory Data Analysis
 
 No training involved — safe to run all cells directly.
 
 ```bash
-uv run jupyter notebook notebooks/part1_eda.ipynb
+uv run jupyter nbconvert \
+  --to notebook --execute \
+  notebooks/part1_eda.ipynb \
+  --output part1_eda.ipynb \
+  --ExecutePreprocessor.timeout=600
 ```
 
 ### Parts 2, 3 & 4 — Models, Fusion & Missing Modality
 
-**Recommended:** Run the training script first to pre-train the models, then open the notebook to inspect results and visualizations:
+**Recommended:** Run the training script first to pre-train the models, then execute the notebook:
 
 ```bash
 # Pre-train unimodal and fusion models
@@ -107,7 +110,11 @@ CUDA_VISIBLE_DEVICES=0 uv run python scripts/train_models.py
 ```
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 uv run jupyter notebook notebooks/parts2_3_4.ipynb
+CUDA_VISIBLE_DEVICES=0 uv run jupyter nbconvert \
+  --to notebook --execute \
+  notebooks/parts2_3_4.ipynb \
+  --output parts2_3_4.ipynb \
+  --ExecutePreprocessor.timeout=7200
 ```
 
 ### Parts 5, 6 & 7 — Class Imbalance & VAE Augmentation
@@ -123,7 +130,11 @@ CUDA_VISIBLE_DEVICES=0 uv run python scripts/train_vae.py
 ```
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 uv run jupyter notebook notebooks/parts_5_6_7.ipynb
+CUDA_VISIBLE_DEVICES=0 uv run jupyter nbconvert \
+  --to notebook --execute \
+  notebooks/parts_5_6_7.ipynb \
+  --output parts_5_6_7.ipynb \
+  --ExecutePreprocessor.timeout=7200
 ```
 
 ### Parts 8 & 9 — Conformal Prediction & Uncertainty
@@ -131,19 +142,11 @@ CUDA_VISIBLE_DEVICES=0 uv run jupyter notebook notebooks/parts_5_6_7.ipynb
 Depends on models trained in parts 2–4. Run `train_models.py` first (see above), then:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 uv run jupyter notebook notebooks/parts_8_9.ipynb
-```
-
-### Non-interactive execution (headless)
-
-To execute a notebook non-interactively (e.g., for reproducibility or CI):
-
-```bash
 CUDA_VISIBLE_DEVICES=0 uv run jupyter nbconvert \
   --to notebook --execute \
-  notebooks/<notebook_name>.ipynb \
-  --output <notebook_name>.ipynb \
-  --ExecutePreprocessor.timeout=7200
+  notebooks/parts_8_9.ipynb \
+  --output parts_8_9.ipynb \
+  --ExecutePreprocessor.timeout=3600
 ```
 
 ## 6. Project Structure
