@@ -341,7 +341,7 @@ def show_failure_cases(
             t = np.arange(sig.shape[1]) / 50.0  # time axis in seconds
             for ch in range(3):
                 axes[0].plot(t, sig[ch], alpha=0.8)
-            axes[0].set_title(f"Accel — True: {true_name} | Pred: {pred_name}")
+            axes[0].set_title(f"Accel")
             axes[0].set_xlabel("Time (s)")
             for ch in range(3, 6):
                 axes[1].plot(t, sig[ch], alpha=0.8)
