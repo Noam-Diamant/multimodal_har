@@ -161,8 +161,6 @@ multimodal_har/
 ├── uv.lock                 # Reproducible lock file
 ├── HOW_TO_RUN.md           # This file
 ├── data/
-│   ├── RGB/                # 861 .avi video files
-│   └── Inertial/           # 861 .mat sensor files
 ├── notebooks/
 │   ├── part1_eda.ipynb       # Part 1: EDA & data issues
 │   ├── parts2_3_4.ipynb      # Parts 2-4: unimodal, fusion, missing modality
