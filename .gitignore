@@ -1,9 +1,13 @@
 # Data and heavy files
-data/
+data/RGB/
+data/Inertial/
+data/UTD-MHAD Dataset/
+data/__MACOSX/
 checkpoints/
 *.avi
 *.mp4
 *.mov
+*.mat
 
 # Python environment and cache
 __pycache__/

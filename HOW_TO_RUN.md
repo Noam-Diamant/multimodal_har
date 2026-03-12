@@ -29,6 +29,8 @@ uv --version
 From the project root (`multimodal_har/`):
 
 ```bash
+# Clone the repo
+git clone https://github.com/Noam-Diamant/multimodal_har.git
 cd multimodal_har
 
 # Install all dependencies from pyproject.toml (creates .venv/ and uv.lock)
